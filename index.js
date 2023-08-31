@@ -1,5 +1,6 @@
-async function weatherData(){
-    const url = 'https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=bangalore';
+
+async function weatherData(city){
+    const url = 'https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city='+city;
     const options = {
         method: 'GET',
         headers: {
@@ -10,10 +11,20 @@ async function weatherData(){
     
     try {
         const response = await fetch(url, options);
-        const result = await response.text();
+        const result = await response.json();
         console.log(result);
+
+        temp.innerHTML=`Temperature is: ${result.temp}`;
+        humidity.innerHTML=`Humidity is: ${result.humidity}`
+        
     } catch (error) {
         console.error(error);
     }
 }
-weatherData()
+
+searchButton.addEventListener('click',(e)=>{
+    e.preventDefault();
+    weatherData(city.value)
+})
+
+// weatherData(city)
