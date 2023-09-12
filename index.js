@@ -12,7 +12,7 @@ async function weatherData(city){
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
 
         temp.innerHTML=`Temperature is: ${result.temp}`;
         humidity.innerHTML=`Humidity is: ${result.humidity}`
@@ -23,7 +23,7 @@ async function weatherData(city){
 }
 
 searchButton.addEventListener('click',(e)=>{
-    e.preventDefault();
+    // e.preventDefault();
     weatherData(city.value)
 })
 
