@@ -10,11 +10,35 @@
 <body>
     <h1>Weather-App</h1>
     <input type="text" id="city">
-    <button id="searchButton"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+    <button id="searchButton" onclick="weatherData(city)"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
    <!-- <h1><span id="city"></span></h1> -->
     
     <div id="temp"></div>
     <div id="humidity"></div>
-    <script src="index.js"></script>
+    <script src="index.js">
+
+async function weatherData(city){
+    const url = 'https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city='+city;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '574441b6efmshabb3656029fabcap174e9ejsnd619ddb478a8',
+            'X-RapidAPI-Host': 'weather-by-api-ninjas.p.rapidapi.com'
+        }
+    };
+    
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        // console.log(result);
+
+        temp.innerHTML=`Temperature is: ${result.temp}`;
+        humidity.innerHTML=`Humidity is: ${result.humidity}`
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+    </script>
 </body>
 </html>
